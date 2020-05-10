@@ -180,7 +180,7 @@ app.post(path, function (req, res) {
 
   const UpdateAttribute = req.query['vote'] === 'no' ? 'votesNo' : 'votesYes'
 
-  let putItemParams = {
+  let updateItemParams = {
     TableName: tableName,
     Key: {
       partitionKey: 'poll-001',
@@ -191,7 +191,7 @@ app.post(path, function (req, res) {
     ReturnValues: 'UPDATED_NEW',
   }
 
-  dynamodb.put(putItemParams, (err, data) => {
+  dynamodb.update(updateItemParams, (err, data) => {
     if (err) {
       res.statusCode = 500
       res.json({ error: err, url: req.url, body: req.body })
